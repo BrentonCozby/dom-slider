@@ -4,6 +4,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 * Slides elements with a known or *unknown* height
 * Slides the content, padding, border, and margin (just the top and bottom values).
 * May slide multiple elements at once
+* Hides elements in a screen-reader-friendly way
 
 ###Example Usage:
 ```JavaScript
