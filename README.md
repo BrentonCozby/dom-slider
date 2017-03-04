@@ -1,5 +1,9 @@
 # slide-down-up-vanilla-js
-Like jQuery's slideDown() &amp; slideUp(), but does not use display: none.
+It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not use display: none.
+####Features:
+* Slides elements with a known or *unknown* height
+* Slides the content, padding, border, and margin (just the top and bottom values).
+* May slide multiple elements at once
 
 ###Example Usage:
 ```JavaScript
