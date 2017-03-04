@@ -9,7 +9,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 ###Example Usage:
 ```JavaScript
 // Adds slideToggle, slideDown, and slideUp methods to Object.prototype
-// and creates a CSS class called '.hidden'
+// and creates a CSS class called '.DOM-slider-hidden'
 DOMsliderInit()  // This line is required
 
 const box = document.querySelector('.box')
