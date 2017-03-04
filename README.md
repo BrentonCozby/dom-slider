@@ -10,7 +10,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 ```JavaScript
 // Adds slideToggle, slideDown, and slideUp methods to Object.prototype
 // and creates a CSS class called '.hidden'
-slideDownUpInit()  // This line is required
+DOMsliderInit()  // This line is required
 
 const box = document.querySelector('.box')
 
