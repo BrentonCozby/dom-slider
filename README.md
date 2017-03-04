@@ -12,7 +12,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 // and creates a CSS class called '.hidden'
 slideDownUpInit()  // This line is required
 
-const box = document.querySelector('.box)
+const box = document.querySelector('.box')
 
 box.slideToggle()
 
