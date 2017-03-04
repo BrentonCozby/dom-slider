@@ -26,6 +26,10 @@ bower install dom-slider --save
 
 npm install dom-slider --save
 ```
+or include a script tag with the file served from a CDN:
+```HTML
+<script src="https://cdn.rawgit.com/BrentonCozby/DOM-slider/7defae4e/dist/DOM-slider.js"></script>
+```
 
 
 ###Options:
