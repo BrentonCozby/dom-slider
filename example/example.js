@@ -1,7 +1,3 @@
-// import DOMsliderInit from './DOM-slider.js'
-
-DOMsliderInit()
-
 const box = document.querySelector('.box')
 const content = document.querySelector('.content')
 const paragraphs = document.querySelectorAll('.content p')

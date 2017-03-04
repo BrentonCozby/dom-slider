@@ -66,7 +66,7 @@ function slide(element, _speed, direction, easing) {
     }, speed || 300)
 }
 
-function DOMsliderInit() {
+(function DOMsliderInit() {
     const sheet = document.createElement('style')
     sheet.id = 'slideCSSClasses'
     sheet.innerHTML = `
@@ -100,6 +100,4 @@ function DOMsliderInit() {
         }
 
     }
-}
-
-// export default DOMsliderInit
+})()
