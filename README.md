@@ -5,6 +5,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 * Slides the content, padding, border, and margin (just the top and bottom values).
 * May slide multiple elements at once
 * Hides elements in a screen-reader-friendly way
+* Zero Dependencies and written in plain JavaScript (compiled to ES5)
 
 ###Example Usage:
 First, place the DOM-slider.js file in your code somewhere. Then do stuff like below:
