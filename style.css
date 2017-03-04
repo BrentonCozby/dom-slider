@@ -1,0 +1,28 @@
+.container {
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.content {
+    line-height: 1.5;
+    padding: 20px 10px;
+    border: 10px solid;
+    margin: 30px 0;
+}
+
+.box {
+    padding: 1px 0;
+    width: 300px;
+    background-color: #aaa;
+    line-height: 8;
+    text-align: center;
+}
+
+button {
+    margin: 10px 0;
+}
+
+.slide-down-button,
+.slide-up-button {
+    display: inline-block;
+}
