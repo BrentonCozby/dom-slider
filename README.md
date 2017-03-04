@@ -3,7 +3,7 @@ Like jQuery's slideDown() &amp; slideUp(), but does not use display: none.
 
 ###Example Usage:
 ```JavaScript
-// Adds slideDown and slideUp methods to Object.prototype, and creates a CSS class called '.hidden'
+// Adds slideToggle, slideDown, and slideUp methods to Object.prototype, and creates a CSS class called '.hidden'
 slideDownUpInit()  // This line is required
 
 box.slideToggle()
