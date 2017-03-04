@@ -66,7 +66,7 @@ function slide(element, _speed, direction, easing) {
     }, speed || 300)
 }
 
-function slideDownUpInit() {
+function DOMsliderInit() {
     const sheet = document.createElement('style')
     sheet.id = 'slideCSSClasses'
     sheet.innerHTML = `
@@ -102,4 +102,4 @@ function slideDownUpInit() {
     }
 }
 
-// export default slideDownUpInit
+// export default DOMsliderInit
