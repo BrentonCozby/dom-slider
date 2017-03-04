@@ -56,10 +56,10 @@ function slide(element, _speed, direction, easing) {
     }, speed || 300);
 }
 
-function DOMsliderInit() {
+(function DOMsliderInit() {
     var sheet = document.createElement('style');
     sheet.id = 'slideCSSClasses';
-    sheet.innerHTML = '\n.DOM-slider-hidden {\nheight: 0 !important;\npadding-top: 0 !important;\npadding-bottom: 0 !important;\nborder-top-width: 0 !important;\nborder-bottom-width: 0 !important;\nmargin-top: 0 !important;\nmargin-bottom: 0 !important;\noverflow: hidden !important;\n}\n';
+    sheet.innerHTML = '\n    .DOM-slider-hidden {\n        height: 0 !important;\n        padding-top: 0 !important;\n        padding-bottom: 0 !important;\n        border-top-width: 0 !important;\n        border-bottom-width: 0 !important;\n        margin-top: 0 !important;\n        margin-bottom: 0 !important;\n        overflow: hidden !important;\n    }\n    ';
     document.head.appendChild(sheet);
 
     Object.prototype.slideDown = function (_speed, easing) {
@@ -77,4 +77,4 @@ function DOMsliderInit() {
             slide(this, _speed, 'up', easing);
         }
     };
-}
+})();

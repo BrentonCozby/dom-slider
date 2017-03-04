@@ -17,7 +17,7 @@ function slide(element, _speed, direction, easing) {
 
     const s = element.style
     const speed = +_speed || 300
-    let contentHeight = element.scrollHeight
+    const contentHeight = element.scrollHeight
 
     // subtract padding from contentHeight
     if(direction === 'up') {
@@ -66,7 +66,7 @@ function slide(element, _speed, direction, easing) {
     }, speed || 300)
 }
 
-function DOMsliderInit() {
+(function DOMsliderInit() {
     const sheet = document.createElement('style')
     sheet.id = 'slideCSSClasses'
     sheet.innerHTML = `
@@ -100,6 +100,4 @@ function DOMsliderInit() {
         }
 
     }
-}
-
-// export default DOMsliderInit
+})()
