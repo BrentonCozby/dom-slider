@@ -1,6 +1,6 @@
-// import slideDownUpInit from './slide-down-up'
+// import DOMsliderInit from './DOM-slider.js'
 
-slideDownUpInit()
+DOMsliderInit()
 
 const box = document.querySelector('.box')
 const content = document.querySelector('.content')

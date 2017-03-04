@@ -92,7 +92,7 @@ function DOMsliderInit() {
     }
 
     Object.prototype.slideToggle = function(_speed, easing) {
-        if(this.classList.contains('hidden')) {
+        if(this.classList.contains('DOM-slider-hidden')) {
             slide(this, _speed, 'down', easing)
         }
         else {
