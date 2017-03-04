@@ -3,14 +3,14 @@ function slide(element, _speed, direction, easing) {
     if(direction === 'down'
         && (
             element.classList.contains('setHeight')
-            || !element.classList.contains('hidden')
+            || !element.classList.contains('DOM-slider-hidden')
         )
     ) return false
 
     // prevent user from sliding up if already sliding
     if(direction === 'up'
         && (
-            element.classList.contains('hidden')
+            element.classList.contains('DOM-slider-hidden')
             || element.classList.contains('setHeight')
         )
     ) return false
@@ -40,7 +40,7 @@ function slide(element, _speed, direction, easing) {
         element.classList.add(`setHeight-${setHeightId}`)
     }
     else {
-        element.classList.add('hidden', `setHeight-${setHeightId}`)
+        element.classList.add('DOM-slider-hidden', `setHeight-${setHeightId}`)
     }
 
     s.transition = `all ${speed}ms ${easing || ''}`
@@ -51,11 +51,11 @@ function slide(element, _speed, direction, easing) {
         // Don't know why, but waiting 10 milliseconds before adding
         // the 'hidden' class when sliding up prevents height-jumping
         setTimeout(function() {
-            element.classList.add('hidden')
+            element.classList.add('DOM-slider-hidden')
         }, 10)
     }
     else {
-        element.classList.remove('hidden')
+        element.classList.remove('DOM-slider-hidden')
     }
 
     setTimeout(function() {
@@ -70,7 +70,7 @@ function DOMsliderInit() {
     const sheet = document.createElement('style')
     sheet.id = 'slideCSSClasses'
     sheet.innerHTML = `
-    .hidden {
+    .DOM-slider-hidden {
         height: 0 !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
@@ -78,7 +78,7 @@ function DOMsliderInit() {
         border-bottom-width: 0 !important;
         margin-top: 0 !important;
         margin-bottom: 0 !important;
-        overflow: hidden;
+        overflow: hidden !important;
     }
     `
     document.head.appendChild(sheet)
