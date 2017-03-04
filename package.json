@@ -1,6 +1,6 @@
 {
   "name": "dom-slider",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Like jQuery's slideToggle(), slideDown(), & slideUp(), but does not use display: none.",
   "main": "dist/DOM-slider.js",
   "directories": {
