@@ -1,0 +1,31 @@
+{
+  "name": "dom-slider",
+  "version": "1.0.0",
+  "description": "Like jQuery's slideToggle(), slideDown(), & slideUp(), but does not use display: none.",
+  "main": "dist/DOM-slider.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrentonCozby/DOM-slider.git"
+  },
+  "keywords": [
+    "jQuery",
+    "accessibility",
+    "animation",
+    "slideDown",
+    "slideUp",
+    "slideToggle",
+    "vanilla-js"
+  ],
+  "author": "Brenton Cozby <brenton.cozby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrentonCozby/DOM-slider/issues"
+  },
+  "homepage": "https://github.com/BrentonCozby/DOM-slider#readme"
+}
