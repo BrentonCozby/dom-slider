@@ -10,7 +10,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 ###Example Usage:
 First, place the DOM-slider.js file in your code somewhere. Then do stuff like below:
 ```JavaScript
-import 'dom-slider'
+import 'dom-slider' // if using ES6 modules
 
 const box = document.querySelector('.box')
 
