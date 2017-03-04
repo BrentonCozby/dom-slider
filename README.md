@@ -1,5 +1,6 @@
 # DOM-slider
 It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not use display: none.
+Uses CSS3 transitions and element.scrollHeight to animate the height of elements with an unknown height.
 ####Features:
 * Slides elements with a known or *unknown* height
 * Slides the content, padding, border, and margin (just the top and bottom values).
