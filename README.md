@@ -14,7 +14,7 @@ box.slideUp(1200)
 box.slideDown(800, 'cubic-bezier(0.25, 0.1, 0.44, 1.4)')
 ```
 ###Options:
-No arguments are required, however, you may give 1 or 2 arguments to slideDown and slideUp:
+No arguments required, but you may give 1 or 2 arguments to slideToggle, slideDown, and slideUp:
 ```JavaScript
 slideDown(speedInMilliseconds, CSSTransitionTimingFunction)
 ```
