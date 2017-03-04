@@ -7,6 +7,7 @@ It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not
 * Hides elements in a screen-reader-friendly way
 
 ###Example Usage:
+First, place the DOM-slider.js file in your code somewhere. Then do stuff like below:
 ```JavaScript
 // Adds slideToggle, slideDown, and slideUp methods to Object.prototype
 // and creates a CSS class called '.DOM-slider-hidden'
