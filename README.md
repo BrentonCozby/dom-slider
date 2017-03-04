@@ -1,4 +1,4 @@
-# slide-down-up-vanilla-js
+# DOM-slider
 It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not use display: none.
 ####Features:
 * Slides elements with a known or *unknown* height
