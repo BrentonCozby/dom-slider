@@ -68,18 +68,18 @@ function slide(element, _speed, direction, easing) {
     document.head.appendChild(sheet);
 
     Object.prototype.slideDown = function (_speed, easing) {
-        slide(this, _speed, 'down', easing);
+        return slide(this, _speed, 'down', easing);
     };
 
     Object.prototype.slideUp = function (_speed, easing) {
-        slide(this, _speed, 'up', easing);
+        return slide(this, _speed, 'up', easing);
     };
 
     Object.prototype.slideToggle = function (_speed, easing) {
         if (this.classList.contains('DOM-slider-hidden')) {
-            slide(this, _speed, 'down', easing);
+            return slide(this, _speed, 'down', easing);
         } else {
-            slide(this, _speed, 'up', easing);
+            return slide(this, _speed, 'up', easing);
         }
     };
 })();

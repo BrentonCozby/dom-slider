@@ -4,8 +4,9 @@ Uses CSS3 transitions and element.scrollHeight to animate the height of elements
 
 ###Features:
 * Slides elements with a known or *unknown* height
-* Slides the content, padding, border, and margin (just the top and bottom values).
+* Slides the height, padding, border, and margin (just the top and bottom values).
 * May slide multiple elements at once
+* Returns a Promise resolved with the element
 * Hides elements in a screen-reader-friendly way
 * Zero Dependencies and written in plain JavaScript (compiled to ES5)
 
@@ -20,7 +21,9 @@ box.slideToggle()
 
 box.slideUp(1200)
 
-box.slideDown(800, 'cubic-bezier(0.25, 0.1, 0.44, 1.4)')
+box.slideDown(800, 'easeInOut')
+
+box.slideDown(500).then(box => box.slideUp(300))
 ```
 ###Install:
 ```

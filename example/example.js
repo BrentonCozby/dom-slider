@@ -8,11 +8,11 @@ const slideToggleButton = document.querySelector('.slide-toggle-button')
 const toggleParagraphsButton = document.querySelector('.toggle-paragraphs-button')
 
 slideToggleButton.addEventListener('click', function() {
-    box.slideToggle();
+    box.slideToggle()
 })
 
 slideDownButton.addEventListener('click', function() {
-    content.slideDown(800, 'cubic-bezier(0.25, 0.1, 0.44, 1.4)')
+    content.slideDown(800)
 })
 
 slideUpButton.addEventListener('click', function() {
@@ -21,6 +21,7 @@ slideUpButton.addEventListener('click', function() {
 
 toggleParagraphsButton.addEventListener('click', function() {
     paragraphs.forEach(p => {
-        p.slideToggle(600)
+        p.slideUp(600)
+        .then(p => p.slideDown(400, 'cubic-bezier(0.25, 0.1, 0.44, 1.4)'))
     })
 })
