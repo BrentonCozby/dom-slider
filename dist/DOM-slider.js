@@ -8,7 +8,7 @@ function slide(element, _speed, direction, easing) {
     if (direction === 'up' && (element.classList.contains('DOM-slider-hidden') || element.classList.contains('setHeight'))) return false;
 
     var s = element.style;
-    var speed = speed = (_speed) ? _speed : (_speed === 0) ? 0 : 300;
+    var speed = _speed ? _speed : _speed === 0 ? 0 : 300;
     var contentHeight = element.scrollHeight;
 
     // subtract padding from contentHeight
@@ -48,12 +48,17 @@ function slide(element, _speed, direction, easing) {
         element.classList.remove('DOM-slider-hidden');
     }
 
-    setTimeout(function () {
-        // remove the temporary inline styles and remove the temp stylesheet
-        element.removeAttribute('style');
-        sheet.parentNode.removeChild(sheet);
-        element.classList.remove('setHeight-' + setHeightId);
-    }, speed);
+    var done = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            // remove the temporary inline styles and remove the temp stylesheet
+            element.removeAttribute('style');
+            sheet.parentNode.removeChild(sheet);
+            element.classList.remove('setHeight-' + setHeightId);
+            resolve(element);
+        }, speed);
+    });
+
+    return done;
 }
 
 (function DOMsliderInit() {

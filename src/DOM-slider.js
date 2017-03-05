@@ -17,7 +17,7 @@ function slide(element, _speed, direction, easing) {
 
     const s = element.style
     const speed = (_speed) ? _speed : (_speed === 0) ? 0 : 300
-    const contentHeight = element.scrollHeight
+    let contentHeight = element.scrollHeight
 
     // subtract padding from contentHeight
     if(direction === 'up') {
