@@ -1,11 +1,19 @@
 'use strict';
 
+Array.from||(Array.from=function(){var a=Object.prototype.toString,b=function(b){return"function"==typeof b||"[object Function]"===a.call(b)},c=function(a){var b=Number(a);return isNaN(b)?0:0!==b&&isFinite(b)?(b>0?1:-1)*Math.floor(Math.abs(b)):b},d=Math.pow(2,53)-1,e=function(a){var b=c(a);return Math.min(Math.max(b,0),d)};return function(c){var d=this,f=Object(c);if(null==c)throw new TypeError("Array.from requires an array-like object - not null or undefined");var h,g=arguments.length>1?arguments[1]:void 0;if("undefined"!=typeof g){if(!b(g))throw new TypeError("Array.from: when provided, the second argument must be a function");arguments.length>2&&(h=arguments[2])}for(var l,i=e(f.length),j=b(d)?Object(new d(i)):new Array(i),k=0;k<i;)l=f[k],g?j[k]="undefined"==typeof h?g(l,k):g.call(h,l,k):j[k]=l,k+=1;return j.length=i,j}}());
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function slide(element, _speed, direction, easing) {
     // prevent user from sliding down if already sliding
-    if (direction === 'down' && (element.classList.contains('setHeight') || !element.classList.contains('DOM-slider-hidden'))) return false;
+    if (direction === 'down' && ([].concat(_toConsumableArray(element.classList)).some(function (e) {
+        return new RegExp(/setHeight/).test(e);
+    }) || !element.classList.contains('DOM-slider-hidden'))) return false;
 
     // prevent user from sliding up if already sliding
-    if (direction === 'up' && (element.classList.contains('DOM-slider-hidden') || element.classList.contains('setHeight'))) return false;
+    if (direction === 'up' && (element.classList.contains('DOM-slider-hidden') || [].concat(_toConsumableArray(element.classList)).some(function (e) {
+        return new RegExp(/setHeight/).test(e);
+    }))) return false;
 
     var s = element.style;
     var speed = _speed ? _speed : _speed === 0 ? 0 : 300;

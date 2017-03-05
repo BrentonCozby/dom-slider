@@ -2,7 +2,7 @@ function slide(element, _speed, direction, easing) {
     // prevent user from sliding down if already sliding
     if(direction === 'down'
         && (
-            element.classList.contains('setHeight')
+            [...element.classList].some(e => new RegExp(/setHeight/).test(e))
             || !element.classList.contains('DOM-slider-hidden')
         )
     ) return false
@@ -11,7 +11,7 @@ function slide(element, _speed, direction, easing) {
     if(direction === 'up'
         && (
             element.classList.contains('DOM-slider-hidden')
-            || element.classList.contains('setHeight')
+            || [...element.classList].some(e => new RegExp(/setHeight/).test(e))
         )
     ) return false
 
