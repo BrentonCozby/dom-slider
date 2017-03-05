@@ -16,7 +16,7 @@ function slide(element, _speed, direction, easing) {
     ) return false
 
     const s = element.style
-    const speed = +_speed || 300
+    const speed = (_speed) ? _speed : (_speed === 0) ? 0 : 300
     const contentHeight = element.scrollHeight
 
     // subtract padding from contentHeight
@@ -58,12 +58,17 @@ function slide(element, _speed, direction, easing) {
         element.classList.remove('DOM-slider-hidden')
     }
 
-    setTimeout(function() {
-        // remove the temporary inline styles and remove the temp stylesheet
-        element.removeAttribute('style')
-        sheet.parentNode.removeChild(sheet)
-        element.classList.remove(`setHeight-${setHeightId}`)
-    }, speed || 300)
+    let done = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            // remove the temporary inline styles and remove the temp stylesheet
+            element.removeAttribute('style')
+            sheet.parentNode.removeChild(sheet)
+            element.classList.remove(`setHeight-${setHeightId}`)
+            resolve(element)
+        }, speed)
+    })
+
+    return done
 }
 
 (function DOMsliderInit() {

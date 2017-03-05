@@ -8,7 +8,7 @@ function slide(element, _speed, direction, easing) {
     if (direction === 'up' && (element.classList.contains('DOM-slider-hidden') || element.classList.contains('setHeight'))) return false;
 
     var s = element.style;
-    var speed = +_speed || 300;
+    var speed = speed = (_speed) ? _speed : (_speed === 0) ? 0 : 300;
     var contentHeight = element.scrollHeight;
 
     // subtract padding from contentHeight
@@ -53,7 +53,7 @@ function slide(element, _speed, direction, easing) {
         element.removeAttribute('style');
         sheet.parentNode.removeChild(sheet);
         element.classList.remove('setHeight-' + setHeightId);
-    }, speed || 300);
+    }, speed);
 }
 
 (function DOMsliderInit() {
