@@ -33,7 +33,7 @@ npm install dom-slider --save
 ```
 or include a script tag with the file served from a CDN:
 ```HTML
-<script src="https://cdn.rawgit.com/BrentonCozby/DOM-slider/7defae4e/dist/dom-slider.js"></script>
+<script src="https://cdn.rawgit.com/BrentonCozby/dom-slider/5af8b397/dist/dom-slider.js"></script>
 ```
 
 
