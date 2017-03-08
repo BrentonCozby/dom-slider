@@ -71,6 +71,36 @@ function slide(element, _speed, direction, easing) {
     return done
 }
 
+function printStyles() {
+    let hiddenElements;
+
+    function showContent() {
+        console.log('before print');
+        hiddenElements = document.querySelectorAll('.DOM-slider-hidden')
+        hiddenElements.forEach(element => {
+            element.classList.remove('DOM-slider-hidden')
+        })
+    }
+
+    function hideContent() {
+        console.log('after print');
+        hiddenElements.forEach(element => {
+            element.classList.add('DOM-slider-hidden')
+        })
+    }
+
+    window.onbeforeprint = showContent
+    window.onafterprint = hideContent
+
+    const mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener(function(mql) {
+        if (mql.matches) {
+            showContent()
+            setTimeout(hideContent, 500)
+        };
+    });
+}
+
 (function DOMsliderInit() {
     const sheet = document.createElement('style')
     sheet.id = 'slideCSSClasses'
@@ -105,4 +135,6 @@ function slide(element, _speed, direction, easing) {
         }
 
     }
+
+    printStyles()
 })()

@@ -1,7 +1,6 @@
 'use strict';
-
+// Array.isArray polyfill and Array.from polyfill
 Array.from||(Array.from=function(){var a=Object.prototype.toString,b=function(b){return"function"==typeof b||"[object Function]"===a.call(b)},c=function(a){var b=Number(a);return isNaN(b)?0:0!==b&&isFinite(b)?(b>0?1:-1)*Math.floor(Math.abs(b)):b},d=Math.pow(2,53)-1,e=function(a){var b=c(a);return Math.min(Math.max(b,0),d)};return function(c){var d=this,f=Object(c);if(null==c)throw new TypeError("Array.from requires an array-like object - not null or undefined");var h,g=arguments.length>1?arguments[1]:void 0;if("undefined"!=typeof g){if(!b(g))throw new TypeError("Array.from: when provided, the second argument must be a function");arguments.length>2&&(h=arguments[2])}for(var l,i=e(f.length),j=b(d)?Object(new d(i)):new Array(i),k=0;k<i;)l=f[k],g?j[k]="undefined"==typeof h?g(l,k):g.call(h,l,k):j[k]=l,k+=1;return j.length=i,j}}());
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function slide(element, _speed, direction, easing) {
@@ -69,6 +68,36 @@ function slide(element, _speed, direction, easing) {
     return done;
 }
 
+function printStyles() {
+    var hiddenElements = void 0;
+
+    function showContent() {
+        console.log('before print');
+        hiddenElements = document.querySelectorAll('.DOM-slider-hidden');
+        hiddenElements.forEach(function (element) {
+            element.classList.remove('DOM-slider-hidden');
+        });
+    }
+
+    function hideContent() {
+        console.log('after print');
+        hiddenElements.forEach(function (element) {
+            element.classList.add('DOM-slider-hidden');
+        });
+    }
+
+    window.onbeforeprint = showContent;
+    window.onafterprint = hideContent;
+
+    var mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener(function (mql) {
+        if (mql.matches) {
+            showContent();
+            setTimeout(hideContent, 500);
+        };
+    });
+}
+
 (function DOMsliderInit() {
     var sheet = document.createElement('style');
     sheet.id = 'slideCSSClasses';
@@ -90,4 +119,6 @@ function slide(element, _speed, direction, easing) {
             return slide(this, _speed, 'up', easing);
         }
     };
+
+    printStyles();
 })();
