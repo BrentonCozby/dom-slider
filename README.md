@@ -2,6 +2,8 @@
 It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not use display: none.
 Uses CSS3 transitions and element.scrollHeight to animate the height of elements with an unknown height.
 
+[**dom-fader**](https://github.com/BrentonCozby/dom-fader) is a thing too.
+
 ###Features:
 * Slides elements with a known or *unknown* height
 * Slides the height, padding, border, and margin (just the top and bottom values).
@@ -35,7 +37,6 @@ or include a script tag with the file served from a CDN:
 ```HTML
 <script src="https://cdn.rawgit.com/BrentonCozby/dom-slider/5af8b397/dist/dom-slider.js"></script>
 ```
-
 
 ###Options:
 No arguments required, but you may give 1 or 2 arguments to slideToggle, slideDown, and slideUp:
