@@ -42,3 +42,6 @@ No arguments required, but you may give 1 or 2 arguments to slideToggle, slideDo
 ```JavaScript
 slideDown(speedInMilliseconds, CSSTransitionTimingFunction)
 ```
+
+###Print Styling:
+DOM-slider removes the DOM-slider-hidden CSS class from all elements before printing.
