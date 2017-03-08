@@ -1,11 +1,11 @@
 {
-  "name": "DOM-slider",
-  "homepage": "https://github.com/BrentonCozby/DOM-slider",
+  "name": "dom-slider",
+  "homepage": "https://github.com/BrentonCozby/dom-slider",
   "authors": [
     "Brenton Cozby <brenton.cozby@gmail.com>"
   ],
   "description": "Like jQuery's slideToggle(), slideDown(), & slideUp(), but does not use display: none.",
-  "main": "dist/DOM-slider.js",
+  "main": "dist/dom-slider.js",
   "module-type": [
       "globals"
   ],
