@@ -25,7 +25,11 @@ box.slideUp(1200)
 
 box.slideDown(800, 'easeInOut')
 
-box.slideDown(500).then(box => box.slideUp(300))
+box.slideDown(500).slideUp(300)
+
+box.slideUp().then(function() {
+  console.log('Done sliding!')
+})
 ```
 ###Install:
 ```
