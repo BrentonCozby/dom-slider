@@ -4,7 +4,7 @@ Uses CSS3 transitions and element.scrollHeight to animate the height of elements
 
 [**dom-fader**](https://github.com/BrentonCozby/dom-fader) is a thing too.
 
-###Features:
+### Features:
 * Slides elements with a known or *unknown* height
 * Slides the height, padding, border, and margin (just the top and bottom values).
 * May slide multiple elements at once
@@ -12,7 +12,7 @@ Uses CSS3 transitions and element.scrollHeight to animate the height of elements
 * Hides elements in a screen-reader-friendly way
 * Zero Dependencies and written in plain JavaScript (compiled to ES5)
 
-###Example Usage:
+### Example Usage:
 First, place the dom-slider.js file in your code somewhere. Then do stuff like below:
 ```JavaScript
 import 'dom-slider' // if using ES6 modules
@@ -31,7 +31,7 @@ box.slideUp().then(function() {
   console.log('Done sliding!')
 })
 ```
-###Install:
+### Install:
 ```
 bower install dom-slider --save
 
@@ -42,11 +42,11 @@ or include a script tag with the file served from a CDN:
 <script src="https://cdn.rawgit.com/BrentonCozby/dom-slider/5af8b397/dist/dom-slider.js"></script>
 ```
 
-###Options:
+### Options:
 No arguments required, but you may give 1 or 2 arguments to slideToggle, slideDown, and slideUp:
 ```JavaScript
 slideDown(speedInMilliseconds, CSSTransitionTimingFunction)
 ```
 
-###Print Styling:
+### Print Styling:
 dom-slider removes the DOM-slider-hidden CSS class from all elements before printing.
