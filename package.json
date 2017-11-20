@@ -3,6 +3,17 @@
   "version": "1.2.3",
   "description": "Plain JavaScript version of jQuery's slideToggle(), slideDown(), & slideUp(), but does not use display: none.",
   "main": "dist/dom-slider.js",
+  "scripts": {
+    "babel": "babel src/dom-slider.js --out-file dist/dom-slider.js",
+    "babel:watch": "babel src/js --watch --out-file dist/dom-slider.js",
+    "uglify:js": "uglifyjs dist/dom-slider.js -o dist/dom-slider.js --compress --mangle",
+    "prod": "npm run babel && npm run uglify:js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "uglify-js": "^3.1.3"
+  },
   "directories": {
     "example": "example"
   },

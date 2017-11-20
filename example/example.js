@@ -19,9 +19,17 @@ slideUpButton.addEventListener('click', function() {
     content.slideUp(1200, 'ease')
 })
 
-toggleParagraphsButton.addEventListener('click', function() {
-    paragraphs.forEach(p => {
-        p.slideUp(600)
-        .then(p => p.slideDown(400, 'cubic-bezier(0.25, 0.1, 0.44, 1.4)'))
+toggleParagraphsButton.addEventListener('click', function () {
+    Promise.all(Array.from(paragraphs).reverse().map((p, i) => {
+        return p.slideUp(500, null, 200 * i)
+    }))
+    .then(() => {
+        paragraphs.forEach((p, i) => {
+            p.slideDown(
+                500 * (i + 1),
+                'cubic-bezier(0.25, 0.1, 0.44, 1.4)',
+                200 * i
+            )
+        })
     })
 })

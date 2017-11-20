@@ -1,11 +1,11 @@
-function slide(element, _speed, direction, easing) {
+function slide(element, slideSpeed, direction, easing, delay) {
     // prevent user from sliding down if already sliding
     if(direction === 'down'
         && (
             [...element.classList].some(e => new RegExp(/setHeight/).test(e))
             || !element.classList.contains('DOM-slider-hidden')
         )
-    ) return false
+    ) return Promise.resolve()
 
     // prevent user from sliding up if already sliding
     if(direction === 'up'
@@ -13,10 +13,10 @@ function slide(element, _speed, direction, easing) {
             element.classList.contains('DOM-slider-hidden')
             || [...element.classList].some(e => new RegExp(/setHeight/).test(e))
         )
-    ) return false
+    ) return Promise.resolve()
 
     const s = element.style
-    const speed = (_speed) ? _speed : (_speed === 0) ? 0 : 300
+    const speed = (slideSpeed) ? slideSpeed : (slideSpeed === 0) ? 0 : 300
     let contentHeight = element.scrollHeight
 
     // subtract padding from contentHeight
@@ -47,16 +47,37 @@ function slide(element, _speed, direction, easing) {
     s.overflow = 'hidden'
 
     // add/remove the CSS class(s) that will animate the element
-    if(direction === 'up') {
-        // Don't know why, but waiting 10 milliseconds before adding
-        // the 'hidden' class when sliding up prevents height-jumping
-        setTimeout(function() {
-            element.classList.add('DOM-slider-hidden')
-        }, 10)
+    function animate() {
+        return new Promise(function (resolve, reject) {
+            if (direction === 'up') {
+                // Don't know why, but waiting 10 milliseconds before adding
+                // the 'hidden' class when sliding up prevents height-jumping
+                setTimeout(function () {
+                    element.classList.add('DOM-slider-hidden')
+                    resolve()
+                }, delay ? +delay + 10 : 10)
+            }
+            else {
+                setTimeout(function () {
+                    element.classList.remove('DOM-slider-hidden')
+                    resolve()
+                }, delay ? +delay + 10 : 10)
+            }
+        })
     }
-    else {
-        element.classList.remove('DOM-slider-hidden')
-    }
+
+    return animate()
+        .then(function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    // remove the temporary inline styles and remove the temp stylesheet
+                    element.removeAttribute('style')
+                    sheet.parentNode.removeChild(sheet)
+                    element.classList.remove(`setHeight-${setHeightId}`)
+                    resolve(element)
+                }, speed)
+            })
+        })
 
     let done = new Promise(function(resolve, reject) {
         setTimeout(function() {
@@ -118,20 +139,20 @@ function printStyles() {
     `
     document.head.appendChild(sheet)
 
-    Object.prototype.slideDown = function(_speed, easing) {
-        return slide(this, _speed, 'down', easing)
+    Object.prototype.slideDown = function (speed, easing, delay) {
+        return slide(this, speed, 'down', easing, delay)
     }
 
-    Object.prototype.slideUp = function(_speed, easing) {
-        return slide(this, _speed, 'up', easing)
+    Object.prototype.slideUp = function(speed, easing, delay) {
+        return slide(this, speed, 'up', easing, delay)
     }
 
-    Object.prototype.slideToggle = function(_speed, easing) {
+    Object.prototype.slideToggle = function(speed, easing, delay) {
         if(this.classList.contains('DOM-slider-hidden')) {
-            return slide(this, _speed, 'down', easing)
+            return slide(this, speed, 'down', easing, delay)
         }
         else {
-            return slide(this, _speed, 'up', easing)
+            return slide(this, speed, 'up', easing, delay)
         }
 
     }
