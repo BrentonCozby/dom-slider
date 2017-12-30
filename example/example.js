@@ -6,6 +6,7 @@ const slideDownButton = document.querySelector('.slide-down-button')
 const slideUpButton = document.querySelector('.slide-up-button')
 const slideToggleButton = document.querySelector('.slide-toggle-button')
 const toggleParagraphsButton = document.querySelector('.toggle-paragraphs-button')
+const faqs = document.querySelector('.faqs')
 
 slideToggleButton.addEventListener('click', function() {
     box.slideToggle()
@@ -32,4 +33,14 @@ toggleParagraphsButton.addEventListener('click', function () {
             )
         })
     })
+})
+
+faqs.addEventListener('click', function(e) {
+    const nextSibling = e.target.nextElementSibling;
+
+    if (!nextSibling.classList.contains('faq-answer')) {
+        return false
+    }
+
+    nextSibling.slideToggle()
 })

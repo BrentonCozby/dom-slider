@@ -1,29 +1,46 @@
-function slide(element, slideSpeed, direction, easing, delay) {
+function slide(options) {
+    const {
+        element,
+        slideSpeed,
+        direction,
+        easing,
+        delay
+    } = options
+
+    const styleSetter = element.style
+    const computedStyle = window.getComputedStyle(element)
+    const isDisplayNoneByDefault = computedStyle.display === 'none'
+    const speed = (slideSpeed) ? slideSpeed : (slideSpeed === 0) ? 0 : 300
+
+    let paddingTop = parseInt(computedStyle.getPropertyValue('padding-top').split('px')[0])
+    let paddingBottom = parseInt(computedStyle.getPropertyValue('padding-bottom').split('px')[0])
+    let contentHeight = element.scrollHeight
+
+    if (isDisplayNoneByDefault) {
+        styleSetter.display = 'block';
+        contentHeight = element.scrollHeight - paddingTop - paddingBottom
+    }
+
     // prevent user from sliding down if already sliding
-    if(direction === 'down'
+    if (direction === 'down'
         && (
-            [...element.classList].some(e => new RegExp(/setHeight/).test(e))
+            [...element.classList].some(e => new RegExp(/DOM-slider-setHeight/).test(e))
             || !element.classList.contains('DOM-slider-hidden')
         )
+        && !isDisplayNoneByDefault
     ) return Promise.resolve()
 
     // prevent user from sliding up if already sliding
-    if(direction === 'up'
+    if (direction === 'up'
         && (
             element.classList.contains('DOM-slider-hidden')
-            || [...element.classList].some(e => new RegExp(/setHeight/).test(e))
+            || [...element.classList].some(e => new RegExp(/DOM-slider-setHeight/).test(e))
         )
+        && !isDisplayNoneByDefault
     ) return Promise.resolve()
 
-    const s = element.style
-    const speed = (slideSpeed) ? slideSpeed : (slideSpeed === 0) ? 0 : 300
-    let contentHeight = element.scrollHeight
-
     // subtract padding from contentHeight
-    if(direction === 'up') {
-        const style = window.getComputedStyle(element)
-        const paddingTop = +style.getPropertyValue('padding-top').split('px')[0]
-        const paddingBottom = +style.getPropertyValue('padding-bottom').split('px')[0]
+    if (direction === 'up') {
         contentHeight = element.scrollHeight - paddingTop - paddingBottom
     }
 
@@ -32,19 +49,19 @@ function slide(element, slideSpeed, direction, easing, delay) {
     // create an id for each class to allow multiple elements to slide
     // at the same time, such as when activated by a forEach loop
     const setHeightId = (Date.now() * Math.random()).toFixed(0)
-    sheet.innerHTML = `.setHeight-${setHeightId} {height: ${contentHeight}px;}`
+    sheet.innerHTML = `.DOM-slider-setHeight-${setHeightId} {height: ${contentHeight}px;}`
     document.head.appendChild(sheet)
 
     // add the CSS classes that will give the computer a fixed starting point
-    if(direction === 'up') {
-        element.classList.add(`setHeight-${setHeightId}`)
+    if (direction === 'up') {
+        element.classList.add(`DOM-slider-setHeight-${setHeightId}`)
     }
     else {
-        element.classList.add('DOM-slider-hidden', `setHeight-${setHeightId}`)
+        element.classList.add('DOM-slider-hidden', `DOM-slider-setHeight-${setHeightId}`)
     }
 
-    s.transition = `all ${speed}ms ${easing || ''}`
-    s.overflow = 'hidden'
+    styleSetter.transition = `all ${speed}ms ${easing || ''}`
+    styleSetter.overflow = 'hidden'
 
     // add/remove the CSS class(s) that will animate the element
     function animate() {
@@ -67,36 +84,25 @@ function slide(element, slideSpeed, direction, easing, delay) {
     }
 
     return animate()
-        .then(function () {
-            return new Promise(function (resolve, reject) {
-                setTimeout(function () {
-                    // remove the temporary inline styles and remove the temp stylesheet
+    .then(function () {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                // remove the temporary inline styles and remove the temp stylesheet
+                if (!isDisplayNoneByDefault) {
                     element.removeAttribute('style')
-                    sheet.parentNode.removeChild(sheet)
-                    element.classList.remove(`setHeight-${setHeightId}`)
-                    resolve(element)
-                }, speed)
-            })
+                }
+                element.classList.remove(`DOM-slider-setHeight-${setHeightId}`)
+                sheet.parentNode.removeChild(sheet)
+                resolve(element)
+            }, speed)
         })
-
-    let done = new Promise(function(resolve, reject) {
-        setTimeout(function() {
-            // remove the temporary inline styles and remove the temp stylesheet
-            element.removeAttribute('style')
-            sheet.parentNode.removeChild(sheet)
-            element.classList.remove(`setHeight-${setHeightId}`)
-            resolve(element)
-        }, speed)
     })
-
-    return done
 }
 
 function printStyles() {
     let hiddenElements;
 
     function showContent() {
-        console.log('before print');
         hiddenElements = document.querySelectorAll('.DOM-slider-hidden')
         hiddenElements.forEach(element => {
             element.classList.remove('DOM-slider-hidden')
@@ -104,7 +110,6 @@ function printStyles() {
     }
 
     function hideContent() {
-        console.log('after print');
         hiddenElements.forEach(element => {
             element.classList.add('DOM-slider-hidden')
         })
@@ -139,22 +144,48 @@ function printStyles() {
     `
     document.head.appendChild(sheet)
 
-    Object.prototype.slideDown = function (speed, easing, delay) {
-        return slide(this, speed, 'down', easing, delay)
+    Object.prototype.slideDown = function (slideSpeed, easing, delay) {
+        return slide({
+            element: this,
+            slideSpeed,
+            direction: 'down',
+            easing,
+            delay
+        })
     }
 
-    Object.prototype.slideUp = function(speed, easing, delay) {
-        return slide(this, speed, 'up', easing, delay)
+    Object.prototype.slideUp = function(slideSpeed, easing, delay) {
+        return slide({
+            element: this,
+            slideSpeed,
+            direction: 'up',
+            easing,
+            delay
+        })
     }
 
-    Object.prototype.slideToggle = function(speed, easing, delay) {
-        if(this.classList.contains('DOM-slider-hidden')) {
-            return slide(this, speed, 'down', easing, delay)
-        }
-        else {
-            return slide(this, speed, 'up', easing, delay)
-        }
+    Object.prototype.slideToggle = function(slideSpeed, easing, delay, visibleDisplayValue) {
+        const computedStyle = window.getComputedStyle(this)
+        const displayValue = computedStyle.getPropertyValue('display')
 
+        if (displayValue === 'none' || this.classList.contains('DOM-slider-hidden')) {
+            return slide({
+                element: this,
+                slideSpeed,
+                direction: 'down',
+                easing,
+                delay,
+                visibleDisplayValue
+            })
+        } else {
+            return slide({
+                element: this,
+                slideSpeed,
+                direction: 'up',
+                easing,
+                delay
+            })
+        }
     }
 
     printStyles()

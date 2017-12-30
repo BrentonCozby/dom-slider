@@ -33,9 +33,7 @@ box.slideUp().then(function() {
 ```
 ### Install:
 ```
-bower install dom-slider --save
-
-npm install dom-slider --save
+npm install --save dom-slider
 ```
 or include a script tag with the file served from a CDN:
 ```HTML
