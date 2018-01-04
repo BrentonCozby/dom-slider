@@ -144,40 +144,26 @@ function printStyles() {
     `
     document.head.appendChild(sheet)
 
-    Object.prototype.slideDown = function (slideSpeed, easing, delay) {
-        return slide({
-            element: this,
-            slideSpeed,
-            direction: 'down',
-            easing,
-            delay
-        })
-    }
-
-    Object.prototype.slideUp = function(slideSpeed, easing, delay) {
-        return slide({
-            element: this,
-            slideSpeed,
-            direction: 'up',
-            easing,
-            delay
-        })
-    }
-
-    Object.prototype.slideToggle = function(slideSpeed, easing, delay, visibleDisplayValue) {
-        const computedStyle = window.getComputedStyle(this)
-        const displayValue = computedStyle.getPropertyValue('display')
-
-        if (displayValue === 'none' || this.classList.contains('DOM-slider-hidden')) {
+    Object.defineProperty(Object.prototype, 'slideDown', {
+        enumerable: false,
+        configurable: false,
+        writable: false,
+        value: function (slideSpeed, easing, delay) {
             return slide({
                 element: this,
                 slideSpeed,
                 direction: 'down',
                 easing,
-                delay,
-                visibleDisplayValue
+                delay
             })
-        } else {
+        }
+    })
+
+    Object.defineProperty(Object.prototype, 'slideUp', {
+        enumerable: false,
+        configurable: false,
+        writable: false,
+        value: function (slideSpeed, easing, delay) {
             return slide({
                 element: this,
                 slideSpeed,
@@ -186,7 +172,36 @@ function printStyles() {
                 delay
             })
         }
-    }
+    })
+
+    Object.defineProperty(Object.prototype, 'slideToggle', {
+        enumerable: false,
+        configurable: false,
+        writable: false,
+        value: function (slideSpeed, easing, delay, visibleDisplayValue) {
+            const computedStyle = window.getComputedStyle(this)
+            const displayValue = computedStyle.getPropertyValue('display')
+
+            if (displayValue === 'none' || this.classList.contains('DOM-slider-hidden')) {
+                return slide({
+                    element: this,
+                    slideSpeed,
+                    direction: 'down',
+                    easing,
+                    delay,
+                    visibleDisplayValue
+                })
+            } else {
+                return slide({
+                    element: this,
+                    slideSpeed,
+                    direction: 'up',
+                    easing,
+                    delay
+                })
+            }
+        }
+    })
 
     printStyles()
 })()
