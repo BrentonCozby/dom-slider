@@ -41,9 +41,9 @@ or include a script tag with the file served from a CDN:
 ```
 
 ### Options:
-No arguments required, but you may give 1 or 2 arguments to slideToggle, slideDown, and slideUp:
+No arguments required, but you may give the following arguments to slideToggle, slideDown, and slideUp:
 ```JavaScript
-slideDown(speedInMilliseconds, CSSTransitionTimingFunction)
+slideDown(speedInMilliseconds, CSSTransitionTimingFunction, delayInMilliseconds)
 ```
 
 ### Print Styling:
