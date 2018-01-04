@@ -144,7 +144,7 @@ function printStyles() {
     `
     document.head.appendChild(sheet)
 
-    Object.defineProperty(Object.prototype, 'slideDown', {
+    Object.defineProperty(Node.prototype, 'slideDown', {
         enumerable: false,
         configurable: false,
         writable: false,
@@ -159,7 +159,7 @@ function printStyles() {
         }
     })
 
-    Object.defineProperty(Object.prototype, 'slideUp', {
+    Object.defineProperty(Node.prototype, 'slideUp', {
         enumerable: false,
         configurable: false,
         writable: false,
@@ -174,7 +174,7 @@ function printStyles() {
         }
     })
 
-    Object.defineProperty(Object.prototype, 'slideToggle', {
+    Object.defineProperty(Node.prototype, 'slideToggle', {
         enumerable: false,
         configurable: false,
         writable: false,
