@@ -1,4 +1,6 @@
 # dom-slider
+[![Known Vulnerabilities](https://snyk.io/test/github/brentoncozby/dom-slider/badge.svg?targetFile=package.json)](https://snyk.io/test/github/brentoncozby/dom-slider?targetFile=package.json)
+
 It works like jQuery's slideToggle(), slideDown(), &amp; slideUp(), but does not use display: none.
 Uses CSS3 transitions and element.scrollHeight to animate the height of elements with an unknown height.
 
