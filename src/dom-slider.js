@@ -4,7 +4,8 @@ function slide(options) {
         slideSpeed,
         direction,
         easing,
-        delay
+        delay,
+        visibleDisplayValue = "block"
     } = options
 
     const styleSetter = element.style
@@ -17,7 +18,7 @@ function slide(options) {
     let contentHeight = element.scrollHeight
 
     if (isDisplayNoneByDefault) {
-        styleSetter.display = 'block';
+        styleSetter.display = visibleDisplayValue;
         contentHeight = element.scrollHeight - paddingTop - paddingBottom
     }
 
