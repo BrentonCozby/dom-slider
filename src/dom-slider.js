@@ -145,7 +145,6 @@ function printStyles() {
     `
     document.head.appendChild(sheet)
 
-
    if (!Node.prototype.slideUp) {
     Object.defineProperty(Node.prototype, 'slideDown', {
         enumerable: false,
