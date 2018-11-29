@@ -145,6 +145,7 @@ function printStyles() {
     `
     document.head.appendChild(sheet)
 
+   if (!Node.prototype.slideUp) {
     Object.defineProperty(Node.prototype, 'slideDown', {
         enumerable: false,
         configurable: false,
@@ -158,9 +159,11 @@ function printStyles() {
                 delay
             })
         }
-    })
+      })
+    }
 
-    Object.defineProperty(Node.prototype, 'slideUp', {
+    if (!Node.prototype.slideUp) {
+      Object.defineProperty(Node.prototype, 'slideUp', {
         enumerable: false,
         configurable: false,
         writable: false,
@@ -173,36 +176,39 @@ function printStyles() {
                 delay
             })
         }
-    })
+      })
+    }   
 
-    Object.defineProperty(Node.prototype, 'slideToggle', {
-        enumerable: false,
-        configurable: false,
-        writable: false,
-        value: function (slideSpeed, easing, delay, visibleDisplayValue) {
-            const computedStyle = window.getComputedStyle(this)
-            const displayValue = computedStyle.getPropertyValue('display')
+    if (!Node.prototype.slideToggle) {    
+      Object.defineProperty(Node.prototype, 'slideToggle', {
+          enumerable: false,
+          configurable: false,
+          writable: false,
+          value: function (slideSpeed, easing, delay, visibleDisplayValue) {
+              const computedStyle = window.getComputedStyle(this)
+              const displayValue = computedStyle.getPropertyValue('display')
 
-            if (displayValue === 'none' || this.classList.contains('DOM-slider-hidden')) {
-                return slide({
-                    element: this,
-                    slideSpeed,
-                    direction: 'down',
-                    easing,
-                    delay,
-                    visibleDisplayValue
-                })
-            } else {
-                return slide({
-                    element: this,
-                    slideSpeed,
-                    direction: 'up',
-                    easing,
-                    delay
-                })
-            }
-        }
-    })
+              if (displayValue === 'none' || this.classList.contains('DOM-slider-hidden')) {
+                  return slide({
+                      element: this,
+                      slideSpeed,
+                      direction: 'down',
+                      easing,
+                      delay,
+                      visibleDisplayValue
+                  })
+              } else {
+                  return slide({
+                      element: this,
+                      slideSpeed,
+                      direction: 'up',
+                      easing,
+                      delay
+                  })
+              }
+          }
+      })
+    }
 
     printStyles()
 })()
