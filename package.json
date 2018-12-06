@@ -7,7 +7,8 @@
     "babel": "babel src/dom-slider.js --out-file dist/dom-slider.js",
     "babel:watch": "babel src --watch --out-file dist/dom-slider.js",
     "uglify:js": "uglifyjs dist/dom-slider.js -o dist/dom-slider.js --compress --mangle",
-    "prod": "npm run babel && npm run uglify:js"
+    "prod": "npm run babel && npm run uglify:js",
+    "prepublish": "npm run prod"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
