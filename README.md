@@ -37,10 +37,6 @@ box.slideUp().then(function() {
 ```
 npm install --save dom-slider
 ```
-or include a script tag with the file served from a CDN:
-```HTML
-<script src="https://cdn.rawgit.com/BrentonCozby/dom-slider/5af8b397/dist/dom-slider.js"></script>
-```
 
 ### Options:
 No arguments required, but you may give the following arguments to slideToggle, slideDown, and slideUp:
