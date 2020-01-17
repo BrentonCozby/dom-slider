@@ -47,13 +47,13 @@ function slide(options) {
 
     // create a setHeight CSS class
     const sheet = document.createElement('style')
-    // create an id for each class to allow multiple elements to slide
+    // create a unique class for each class to allow multiple elements to slide
     // at the same time, such as when activated by a forEach loop
     const setHeightId = (Date.now() * Math.random()).toFixed(0)
     sheet.innerHTML = `.DOM-slider-setHeight-${setHeightId} {height: ${contentHeight}px;}`
     document.head.appendChild(sheet)
 
-    // add the CSS classes that will give the computer a fixed starting point
+    // add the CSS classes that provide a fixed starting point
     if (direction === 'up') {
         element.classList.add(`DOM-slider-setHeight-${setHeightId}`)
     }
