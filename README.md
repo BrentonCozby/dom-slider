@@ -15,34 +15,39 @@ Uses CSS3 transitions and element.scrollHeight to animate the height of elements
 * Zero Dependencies and written in plain JavaScript (compiled to ES5)
 
 ### Example Usage:
-First, place the dom-slider.js file in your code somewhere. Hide all those elements that you want to slide down/toggle using `display: none` in CSS. Then do stuff like below:
+First, place the dom-slider CDN link in your html file above your own JavaScript files. Hide all the elements that you want to slide down/toggle using `display: none` in CSS. Then do stuff like below:
 
 ```JavaScript
-import 'dom-slider' // if using ES6 modules
-
 const box = document.querySelector('.box')
 
-box.slideToggle()
+slideToggle({element: box})
 
-box.slideUp(1200)
+slideUp({element: box, slideSpeed: 1200})
 
-box.slideDown(800, 'easeInOut')
+slideDown({element: box, slideSpeed: 800, easing: 'easeInOut'})
 
-box.slideDown(500).slideUp(300)
-
-box.slideUp().then(function() {
-  console.log('Done sliding!')
+// Promises (or async/await)
+slideDown({element: box, slideSpeed: 500}).then(() => {
+  slideUp({element: box, slideSpeed: 300})
 })
 ```
+
+
 ### Install:
 ```
 npm install --save dom-slider
 ```
 
 ### Options:
-No arguments required, but you may give the following arguments to slideToggle, slideDown, and slideUp:
+The element argument is required, but you may provide the following optional arguments to slideToggle, slideDown, and slideUp:
 ```JavaScript
-slideDown(speedInMilliseconds, CSSTransitionTimingFunction, delayInMilliseconds, visibleDisplayValue)
+slideDown({
+  element,
+  slideSpeed, // speed in milliseconds
+  easing, // CSS transition timing function,
+  delay, // delay in milliseconds,
+  displayWhenVisible, // the CSS display value when the element is visible; the default value is "block"
+})
 ```
 
 ### Print Styling:
