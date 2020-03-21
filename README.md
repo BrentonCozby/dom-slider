@@ -15,7 +15,7 @@ Uses CSS3 transitions and element.scrollHeight to animate the height of elements
 * Zero Dependencies and written in plain JavaScript (compiled to ES5)
 
 ### Example Usage:
-[dom-slider CDN link](https://rawcdn.githack.com/BrentonCozby/dom-slider/39907b0f794ef5e2e48a0aa81fe8af60f34230a8/dist/dom-slider.js)
+[dom-slider CDN link](https://rawcdn.githack.com/BrentonCozby/dom-slider/d44e567fd52fb07019be3f0f2ec0f8bdffe271c1/dist/dom-slider.js)
 
 First, place the dom-slider CDN link in your html file above your own JavaScript files. Hide all the elements that you want to slide down/toggle using `display: none` in CSS. Then do stuff like below:
 
