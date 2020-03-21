@@ -1,17 +1,16 @@
-'use strict';
+"use strict";
 
 (function () {
   'use strict';
 
   var styleCache = {};
-
   initDomSlider();
   initPrintStyles();
 
   function initDomSlider() {
     var sheet = document.createElement('style');
     sheet.id = 'dom-slider';
-    sheet.innerHTML = '\n      .DOM-slider-hidden {\n        height: 0 !important;\n        padding-top: 0 !important;\n        padding-bottom: 0 !important;\n        border-top-width: 0 !important;\n        border-bottom-width: 0 !important;\n        margin-top: 0 !important;\n        margin-bottom: 0 !important;\n        overflow: hidden !important;\n      }\n    ';
+    sheet.innerHTML = "\n      .DOM-slider-hidden {\n        height: 0 !important;\n        padding-top: 0 !important;\n        padding-bottom: 0 !important;\n        border-top-width: 0 !important;\n        border-bottom-width: 0 !important;\n        margin-top: 0 !important;\n        margin-bottom: 0 !important;\n        overflow: hidden !important;\n      }\n    ";
     document.head.appendChild(sheet);
 
     function slideDown(_ref) {
@@ -20,7 +19,6 @@
           easing = _ref.easing,
           delay = _ref.delay,
           visibleDisplayValue = _ref.visibleDisplayValue;
-
       return slide({
         element: element,
         slideSpeed: slideSpeed,
@@ -36,7 +34,6 @@
           slideSpeed = _ref2.slideSpeed,
           easing = _ref2.easing,
           delay = _ref2.delay;
-
       return slide({
         element: element,
         slideSpeed: slideSpeed,
@@ -52,7 +49,6 @@
           easing = _ref3.easing,
           delay = _ref3.delay,
           visibleDisplayValue = _ref3.visibleDisplayValue;
-
       return slide({
         element: element,
         slideSpeed: slideSpeed,
@@ -75,10 +71,9 @@
         direction = _ref4.direction,
         easing = _ref4.easing,
         _ref4$delay = _ref4.delay,
-        delay = _ref4$delay === undefined ? 0 : _ref4$delay,
+        delay = _ref4$delay === void 0 ? 0 : _ref4$delay,
         _ref4$visibleDisplayV = _ref4.visibleDisplayValue,
-        visibleDisplayValue = _ref4$visibleDisplayV === undefined ? 'block' : _ref4$visibleDisplayV;
-
+        visibleDisplayValue = _ref4$visibleDisplayV === void 0 ? 'block' : _ref4$visibleDisplayV;
     var domSliderId = element.dataset.domSliderId || (Date.now() * Math.random()).toFixed(0);
 
     if (!element.dataset.domSliderId) {
@@ -94,7 +89,6 @@
     var isDisplayNoneByDefault = computedStyle.getPropertyValue('display') === 'none';
     var slideDirection = direction || (isDisplayNoneByDefault || element.classList.contains('DOM-slider-hidden') ? 'down' : 'up');
     var speed = slideSpeed ? slideSpeed : slideSpeed === 0 ? 0 : 300;
-
     var paddingTop = parseInt(computedStyle.getPropertyValue('padding-top').split('px')[0]);
     var paddingBottom = parseInt(computedStyle.getPropertyValue('padding-bottom').split('px')[0]);
     var contentHeight = Math.max(element.scrollHeight - paddingTop - paddingBottom, 0);
@@ -117,13 +111,12 @@
       element.classList.add('DOM-slider-hidden');
       element.style.display = visibleDisplayValue;
       contentHeight = element.scrollHeight;
-    }
+    } // a fixed height is required in order to animate the height
 
-    // a fixed height is required in order to animate the height
-    element.style.height = (cachedStyle.height ? cachedStyle.height : contentHeight) + 'px';
-    element.style.transition = 'all ' + speed + 'ms ' + (easing || '');
+
+    element.style.height = "".concat(cachedStyle.height ? cachedStyle.height : contentHeight, "px");
+    element.style.transition = "all ".concat(speed, "ms ").concat(easing || '');
     element.style.overflow = 'hidden';
-
     return new Promise(function (resolve) {
       setTimeout(function () {
         // begin the animation
@@ -137,9 +130,7 @@
           element.style.removeProperty('transition');
           element.style.removeProperty('overflow');
           element.removeAttribute('data-sliding');
-
           styleCache[domSliderId].height = contentHeight;
-
           resolve(element);
         }, speed);
       });
@@ -147,7 +138,7 @@
   }
 
   function initPrintStyles() {
-    var hiddenElements = void 0;
+    var hiddenElements;
 
     function showContent() {
       hiddenElements = document.querySelectorAll('.DOM-slider-hidden');
@@ -164,7 +155,6 @@
 
     window.onbeforeprint = showContent;
     window.onafterprint = hideContent;
-
     var mediaQueryList = window.matchMedia('print');
     mediaQueryList.addListener(function (mql) {
       if (mql.matches) {
