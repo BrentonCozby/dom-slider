@@ -1,53 +1,57 @@
 .container {
-    margin: 0 auto;
-    max-width: 700px;
-}
-
-.content {
-    line-height: 1.5;
-    padding: 20px 10px;
-    border: 10px solid;
+  margin: 0 auto;
+  max-width: 700px;
 }
 
 .box {
-    padding: 1px 0;
-    width: 300px;
-    background-color: #aaa;
-    line-height: 8;
-    text-align: center;
+  padding: 70px 0;
+  width: 300px;
+  background-color: #aaa;
+  text-align: center;
 }
 
+.box p {
+  margin: 0;
+}
+
+.faqs {
+  margin: 30px 0;
+  list-style: none;
+  padding: 0;
+}
+
+.faqs h4 {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0;
+}
+
+.faqs h4:hover {
+  background-color: #f5f5f5;
+}
+
+.faqs .faq-answer {
+  display: none;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin: 0;
+  padding: 10px;
+}
+
+
 button {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .slide-down-button,
 .slide-up-button {
-    display: inline-block;
+  display: inline-block;
 }
 
-.faqs {
-    margin: 30px 0;
-    list-style: none;
-    padding: 0;
-}
-
-.faqs h4 {
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin: 0;
-}
-
-.faqs h4:hover {
-    background-color: #f5f5f5;
-}
-
-.faqs .faq-answer {
-    display: none;
-    border: 1px solid #eee;
-    border-radius: 3px;
-    margin: 0;
-    padding: 10px;
+.content {
+  line-height: 1.5;
+  padding: 20px 10px;
+  border: 10px solid;
 }

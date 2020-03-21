@@ -6,15 +6,14 @@
   "scripts": {
     "babel": "babel src/dom-slider.js --out-file dist/dom-slider.js",
     "babel:watch": "babel src --watch --out-file dist/dom-slider.js",
-    "uglify:js": "uglifyjs dist/dom-slider.js -o dist/dom-slider.js --compress --mangle",
-    "prod": "npm run babel && npm run uglify:js",
+    "prod": "npm run babel",
     "prepublish": "npm run prod"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
-    "uglify-js": "^3.7.5"
+    "uglify-js": "^3.8.0"
   },
   "directories": {
     "example": "example"
@@ -25,7 +24,6 @@
   },
   "keywords": [
     "jQuery",
-    "accessibility",
     "animation",
     "slideDown",
     "slideUp",

@@ -1,1 +1,176 @@
-"use strict";function _toConsumableArray(e){if(Array.isArray(e)){for(var i=0,t=Array(e.length);i<e.length;i++)t[i]=e[i];return t}return Array.from(e)}!function(){function o(e){var t=e.element,i=e.slideSpeed,n=e.direction,d=e.easing,s=e.delay,o=void 0===s?0:s,r=e.displayWhenVisible,l=void 0===r?"block":r,a=t.style,p=window.getComputedStyle(t),c="none"===p.display,u=i||(0===i?0:300),m=parseInt(p.getPropertyValue("padding-top").split("px")[0]),h=parseInt(p.getPropertyValue("padding-bottom").split("px")[0]),g=t.scrollHeight;if(c&&(a.display=l,g=t.scrollHeight-m-h),"down"===n&&([].concat(_toConsumableArray(t.classList)).some(function(e){return new RegExp(/DOM-slider-setHeight/).test(e)})||!t.classList.contains("DOM-slider-hidden"))&&!c)return Promise.resolve();if("up"===n&&(t.classList.contains("DOM-slider-hidden")||[].concat(_toConsumableArray(t.classList)).some(function(e){return new RegExp(/DOM-slider-setHeight/).test(e)}))&&!c)return Promise.resolve();"up"===n&&(g=t.scrollHeight-m-h);var y=document.createElement("style"),f=(Date.now()*Math.random()).toFixed(0);return y.innerHTML=".DOM-slider-setHeight-"+f+" {height: "+g+"px;}",document.head.appendChild(y),"up"===n?t.classList.add("DOM-slider-setHeight-"+f):t.classList.add("DOM-slider-hidden","DOM-slider-setHeight-"+f),a.transition="all "+u+"ms "+(d||""),a.overflow="hidden",new Promise(function(e,i){"up"===n?setTimeout(function(){t.classList.add("DOM-slider-hidden"),e()},o?+o+10:10):setTimeout(function(){t.classList.remove("DOM-slider-hidden"),e()},o?+o+10:10)}).then(function(){return new Promise(function(e,i){setTimeout(function(){c||t.removeAttribute("style"),t.classList.remove("DOM-slider-setHeight-"+f),y.parentNode.removeChild(y),e(t)},u)})})}function i(){(e=document.querySelectorAll(".DOM-slider-hidden")).forEach(function(e){e.classList.remove("DOM-slider-hidden")})}function t(){e.forEach(function(e){e.classList.add("DOM-slider-hidden")})}var e,n;(n=document.createElement("style")).id="slideCSSClasses",n.innerHTML="\n            .DOM-slider-hidden {\n                height: 0 !important;\n                padding-top: 0 !important;\n                padding-bottom: 0 !important;\n                border-top-width: 0 !important;\n                border-bottom-width: 0 !important;\n                margin-top: 0 !important;\n                margin-bottom: 0 !important;\n                overflow: hidden !important;\n            }\n        ",document.head.appendChild(n),window.domSlider={slideDown:function(e){return o({element:e.element,slideSpeed:e.slideSpeed,direction:"down",easing:e.easing,delay:e.delay,displayWhenVisible:e.displayWhenVisible})},slideUp:function(e){return o({element:e.element,slideSpeed:e.slideSpeed,direction:"up",easing:e.easing,delay:e.delay})},slideToggle:function(e){var i=e.element,t=e.slideSpeed,n=e.easing,d=e.delay,s=e.displayWhenVisible;return"none"===window.getComputedStyle(i).getPropertyValue("display")||i.classList.contains("DOM-slider-hidden")?o({element:i,slideSpeed:t,direction:"down",easing:n,delay:d,displayWhenVisible:s}):o({element:i,slideSpeed:t,direction:"up",easing:n,delay:d})}},e=void 0,window.onbeforeprint=i,window.onafterprint=t,window.matchMedia("print").addListener(function(e){e.matches&&(i(),setTimeout(t,500))})}();
+'use strict';
+
+(function () {
+  'use strict';
+
+  var styleCache = {};
+
+  initDomSlider();
+  initPrintStyles();
+
+  function initDomSlider() {
+    var sheet = document.createElement('style');
+    sheet.id = 'dom-slider';
+    sheet.innerHTML = '\n      .DOM-slider-hidden {\n        height: 0 !important;\n        padding-top: 0 !important;\n        padding-bottom: 0 !important;\n        border-top-width: 0 !important;\n        border-bottom-width: 0 !important;\n        margin-top: 0 !important;\n        margin-bottom: 0 !important;\n        overflow: hidden !important;\n      }\n    ';
+    document.head.appendChild(sheet);
+
+    function slideDown(_ref) {
+      var element = _ref.element,
+          slideSpeed = _ref.slideSpeed,
+          easing = _ref.easing,
+          delay = _ref.delay,
+          visibleDisplayValue = _ref.visibleDisplayValue;
+
+      return slide({
+        element: element,
+        slideSpeed: slideSpeed,
+        direction: 'down',
+        easing: easing,
+        delay: delay,
+        visibleDisplayValue: visibleDisplayValue
+      });
+    }
+
+    function slideUp(_ref2) {
+      var element = _ref2.element,
+          slideSpeed = _ref2.slideSpeed,
+          easing = _ref2.easing,
+          delay = _ref2.delay;
+
+      return slide({
+        element: element,
+        slideSpeed: slideSpeed,
+        direction: 'up',
+        easing: easing,
+        delay: delay
+      });
+    }
+
+    function slideToggle(_ref3) {
+      var element = _ref3.element,
+          slideSpeed = _ref3.slideSpeed,
+          easing = _ref3.easing,
+          delay = _ref3.delay,
+          visibleDisplayValue = _ref3.visibleDisplayValue;
+
+      return slide({
+        element: element,
+        slideSpeed: slideSpeed,
+        easing: easing,
+        delay: delay,
+        visibleDisplayValue: visibleDisplayValue
+      });
+    }
+
+    window.domSlider = {
+      slideDown: slideDown,
+      slideUp: slideUp,
+      slideToggle: slideToggle
+    };
+  }
+
+  function slide(_ref4) {
+    var element = _ref4.element,
+        slideSpeed = _ref4.slideSpeed,
+        direction = _ref4.direction,
+        easing = _ref4.easing,
+        _ref4$delay = _ref4.delay,
+        delay = _ref4$delay === undefined ? 0 : _ref4$delay,
+        _ref4$visibleDisplayV = _ref4.visibleDisplayValue,
+        visibleDisplayValue = _ref4$visibleDisplayV === undefined ? 'block' : _ref4$visibleDisplayV;
+
+    var domSliderId = element.dataset.domSliderId || (Date.now() * Math.random()).toFixed(0);
+
+    if (!element.dataset.domSliderId) {
+      element.dataset.domSliderId = domSliderId;
+    }
+
+    if (!styleCache[domSliderId]) {
+      styleCache[domSliderId] = {};
+    }
+
+    var cachedStyle = styleCache[domSliderId];
+    var computedStyle = window.getComputedStyle(element);
+    var isDisplayNoneByDefault = computedStyle.getPropertyValue('display') === 'none';
+    var slideDirection = direction || (isDisplayNoneByDefault || element.classList.contains('DOM-slider-hidden') ? 'down' : 'up');
+    var speed = slideSpeed ? slideSpeed : slideSpeed === 0 ? 0 : 300;
+
+    var paddingTop = parseInt(computedStyle.getPropertyValue('padding-top').split('px')[0]);
+    var paddingBottom = parseInt(computedStyle.getPropertyValue('padding-bottom').split('px')[0]);
+    var contentHeight = Math.max(element.scrollHeight - paddingTop - paddingBottom, 0);
+
+    if (element.dataset.sliding) {
+      return Promise.resolve(element);
+    }
+
+    if (slideDirection === 'down' && !isDisplayNoneByDefault && !element.classList.contains('DOM-slider-hidden')) {
+      return Promise.resolve(element);
+    }
+
+    if (slideDirection === 'up' && element.classList.contains('DOM-slider-hidden')) {
+      return Promise.resolve(element);
+    }
+
+    element.dataset.sliding = true;
+
+    if (slideDirection === 'down' && isDisplayNoneByDefault) {
+      element.classList.add('DOM-slider-hidden');
+      element.style.display = visibleDisplayValue;
+      contentHeight = element.scrollHeight;
+    }
+
+    // a fixed height is required in order to animate the height
+    element.style.height = (cachedStyle.height ? cachedStyle.height : contentHeight) + 'px';
+    element.style.transition = 'all ' + speed + 'ms ' + (easing || '');
+    element.style.overflow = 'hidden';
+
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        // begin the animation
+        element.classList.toggle('DOM-slider-hidden');
+        resolve();
+      }, delay ? +delay : 0);
+    }).then(function () {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          element.style.removeProperty('height');
+          element.style.removeProperty('transition');
+          element.style.removeProperty('overflow');
+          element.removeAttribute('data-sliding');
+
+          styleCache[domSliderId].height = contentHeight;
+
+          resolve(element);
+        }, speed);
+      });
+    });
+  }
+
+  function initPrintStyles() {
+    var hiddenElements = void 0;
+
+    function showContent() {
+      hiddenElements = document.querySelectorAll('.DOM-slider-hidden');
+      hiddenElements.forEach(function (element) {
+        element.classList.remove('DOM-slider-hidden');
+      });
+    }
+
+    function hideContent() {
+      hiddenElements.forEach(function (element) {
+        element.classList.add('DOM-slider-hidden');
+      });
+    }
+
+    window.onbeforeprint = showContent;
+    window.onafterprint = hideContent;
+
+    var mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener(function (mql) {
+      if (mql.matches) {
+        showContent();
+        setTimeout(hideContent, 500);
+      }
+    });
+  }
+})();
