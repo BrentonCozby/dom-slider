@@ -36,11 +36,6 @@ slideDown({element: box, slideSpeed: 500}).then(() => {
 })
 ```
 
-### Install:
-```
-npm install --save dom-slider
-```
-
 ### Options:
 The `element` argument is required, but you may provide the following optional arguments to slideToggle, slideDown, and slideUp:
 ```JavaScript
@@ -54,4 +49,4 @@ slideDown({
 ```
 
 ### Print Styling:
-dom-slider removes the DOM-slider-hidden CSS class from all elements before printing.
+dom-slider removes the DOM-slider-hidden CSS class from all elements before printing and adds them back after printing.
