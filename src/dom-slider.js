@@ -102,6 +102,7 @@
     }
 
     element.dataset.sliding = true
+    element.setAttribute('aria-hidden', slideDirection === 'down' ? 'false' : 'true')
 
     if (slideDirection === 'down' && isDisplayNoneByDefault) {
       element.classList.add('DOM-slider-hidden')
