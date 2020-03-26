@@ -6,8 +6,7 @@
   "scripts": {
     "babel": "babel src/dom-slider.js --out-file dist/dom-slider.js",
     "babel:watch": "babel src --watch --out-file dist/dom-slider.js",
-    "prod": "npm run babel",
-    "prepublish": "npm run prod"
+    "prepublish": "npm run babel"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
