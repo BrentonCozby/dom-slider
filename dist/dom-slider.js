@@ -123,7 +123,7 @@
         // begin the animation
         element.classList.toggle('DOM-slider-hidden');
         resolve();
-      }, 20 + (isFinite(delay) ? +delay : 0));
+      }, +delay > 20 ? +delay : 20);
     }).then(function () {
       return new Promise(function (resolve) {
         setTimeout(function () {
