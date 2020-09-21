@@ -85,9 +85,14 @@
     const slideDirection = direction || (isDisplayNoneByDefault || element.classList.contains('DOM-slider-hidden') ? 'down' : 'up')
     const speed = slideSpeed ? slideSpeed : (slideSpeed === 0) ? 0 : 300
 
+    let boxSizing = computedStyle.getPropertyValue('box-sizing')
     let paddingTop = parseInt(computedStyle.getPropertyValue('padding-top').split('px')[0])
     let paddingBottom = parseInt(computedStyle.getPropertyValue('padding-bottom').split('px')[0])
     let contentHeight = Math.max(element.scrollHeight - paddingTop - paddingBottom, 0)
+
+    if (boxSizing === 'border-box') {
+      contentHeight = Math.max(element.scrollHeight, 0)
+    }
 
     if (element.dataset.sliding) {
       return Promise.resolve(element)

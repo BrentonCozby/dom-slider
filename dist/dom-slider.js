@@ -89,9 +89,14 @@
     var isDisplayNoneByDefault = computedStyle.getPropertyValue('display') === 'none';
     var slideDirection = direction || (isDisplayNoneByDefault || element.classList.contains('DOM-slider-hidden') ? 'down' : 'up');
     var speed = slideSpeed ? slideSpeed : slideSpeed === 0 ? 0 : 300;
+    var boxSizing = computedStyle.getPropertyValue('box-sizing');
     var paddingTop = parseInt(computedStyle.getPropertyValue('padding-top').split('px')[0]);
     var paddingBottom = parseInt(computedStyle.getPropertyValue('padding-bottom').split('px')[0]);
     var contentHeight = Math.max(element.scrollHeight - paddingTop - paddingBottom, 0);
+
+    if (boxSizing === 'border-box') {
+      contentHeight = Math.max(element.scrollHeight, 0);
+    }
 
     if (element.dataset.sliding) {
       return Promise.resolve(element);
