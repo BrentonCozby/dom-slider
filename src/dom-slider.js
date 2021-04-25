@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  let styleCache = {}
-
   initDomSlider()
   initPrintStyles()
 
@@ -75,11 +73,6 @@
       element.dataset.domSliderId = domSliderId
     }
 
-    if (!styleCache[domSliderId]) {
-      styleCache[domSliderId] = {}
-    }
-
-    const cachedStyle = styleCache[domSliderId]
     const computedStyle = window.getComputedStyle(element)
     const isDisplayNoneByDefault = computedStyle.getPropertyValue('display') === 'none'
     const slideDirection = direction || (isDisplayNoneByDefault || element.classList.contains('DOM-slider-hidden') ? 'down' : 'up')
@@ -116,7 +109,7 @@
     }
 
     // a fixed height is required in order to animate the height
-    element.style.height = `${cachedStyle.height ? cachedStyle.height : contentHeight}px`
+    element.style.height = `${contentHeight}px`
     element.style.transition = `all ${speed}ms ${easing || ''}`
     element.style.overflow = 'hidden'
 
@@ -134,8 +127,6 @@
           element.style.removeProperty('transition')
           element.style.removeProperty('overflow')
           element.removeAttribute('data-sliding')
-
-          styleCache[domSliderId].height = contentHeight
 
           resolve(element)
         }, speed)

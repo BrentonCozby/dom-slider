@@ -9,8 +9,13 @@ const slideUpButton = document.querySelector('.slide-up-button')
 const slideToggleButton = document.querySelector('.slide-toggle-button')
 const toggleParagraphsButton = document.querySelector('.toggle-paragraphs-button')
 const faqs = document.querySelector('.faqs')
+const addFaqButton = document.querySelector('.add-faq-button')
 
 slideToggleButton.addEventListener('click', function() {
+    const newBoxParagraph = document.createElement('p')
+    newBoxParagraph.textContent = 'Hello World'
+    box.appendChild(newBoxParagraph)
+
     slideToggle({element: box})
 })
 
@@ -22,6 +27,21 @@ faqs.addEventListener('click', function(e) {
     }
 
     slideToggle({element: nextSibling})
+})
+
+addFaqButton.addEventListener('click', function() {
+    const newFaq = document.createElement('li')
+
+    newFaq.innerHTML = `
+    <li>
+        <h4>FAQ #4</h4>
+        <p class="faq-answer">This is the answer to FAQ #4.</p>
+    </li>
+    `
+
+    faqs.appendChild(newFaq)
+
+    addFaqButton.style.display = 'none';
 })
 
 

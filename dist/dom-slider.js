@@ -3,7 +3,6 @@
 (function () {
   'use strict';
 
-  var styleCache = {};
   initDomSlider();
   initPrintStyles();
 
@@ -80,11 +79,6 @@
       element.dataset.domSliderId = domSliderId;
     }
 
-    if (!styleCache[domSliderId]) {
-      styleCache[domSliderId] = {};
-    }
-
-    var cachedStyle = styleCache[domSliderId];
     var computedStyle = window.getComputedStyle(element);
     var isDisplayNoneByDefault = computedStyle.getPropertyValue('display') === 'none';
     var slideDirection = direction || (isDisplayNoneByDefault || element.classList.contains('DOM-slider-hidden') ? 'down' : 'up');
@@ -120,7 +114,7 @@
     } // a fixed height is required in order to animate the height
 
 
-    element.style.height = "".concat(cachedStyle.height ? cachedStyle.height : contentHeight, "px");
+    element.style.height = "".concat(contentHeight, "px");
     element.style.transition = "all ".concat(speed, "ms ").concat(easing || '');
     element.style.overflow = 'hidden';
     return new Promise(function (resolve) {
@@ -136,7 +130,6 @@
           element.style.removeProperty('transition');
           element.style.removeProperty('overflow');
           element.removeAttribute('data-sliding');
-          styleCache[domSliderId].height = contentHeight;
           resolve(element);
         }, speed);
       });
