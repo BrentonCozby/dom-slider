@@ -28,7 +28,7 @@ slideToggle({element: box})
 
 slideUp({element: box, slideSpeed: 1200})
 
-slideDown({element: box, slideSpeed: 800, easing: 'easeInOut'})
+slideDown({element: box, slideSpeed: 800, easing: 'ease-in-out'})
 
 // Promises (or async/await)
 slideDown({element: box, slideSpeed: 500}).then(() => {
